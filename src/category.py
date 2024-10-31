@@ -28,12 +28,22 @@ class Category:
         return f"{self.name}, количество продуктов: {all_quantity} шт."
 
     def add_product(self, product: Product) -> Any:
-        self.__products.append(product)
-        Category.product_count += 1
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
+            raise TypeError
 
     @property
-    def products(self) -> str:
+    def get_product_list(self) -> str:
         product_list = ""
         for product in self.__products:
-            product_list += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            product_list += f"{str(product)}\n"
         return product_list
+
+    @property
+    def products(self) -> list:
+        products_list = []
+        for product in self.__products:
+            products_list.append(product)
+        return products_list
