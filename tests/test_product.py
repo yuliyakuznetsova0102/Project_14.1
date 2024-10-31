@@ -28,6 +28,7 @@ def test_prod_price_property(capsys, first_product):
     first_product.price = 756.57
     assert first_product.price == 756.57
 
+
 def test_product_str(first_product):
     assert str(first_product) == "Product, 84.5 руб. Остаток: 10 шт."
 

@@ -2,8 +2,9 @@ import pytest
 
 from src.category import Category
 from src.product import Product
-from src.product_Lawn_Grass import LawnGrass
-from src.product_Smartphone import Smartphone
+from src.product_lawn_grass import LawnGrass
+from src.product_smartphone import Smartphone
+
 
 @pytest.fixture
 def first_product():
@@ -83,6 +84,7 @@ def product_dict():
         "price": 145.75,
         "quantity": 23,
     }
+
 
 @pytest.fixture
 def smartphone1():
