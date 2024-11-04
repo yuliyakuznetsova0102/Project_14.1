@@ -1,4 +1,8 @@
-class Product:
+from src.base_product import BaseProduct
+from src.mixin_print import MixinPrint
+
+
+class Product(BaseProduct, MixinPrint):
     """Продукт"""
 
     name: str
@@ -9,14 +13,17 @@ class Product:
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        return self.quantity * self.price + other.quantity * other.price
+        if type(other) is Product:
+            return self.quantity * self.price + other.quantity * other.price
+        raise TypeError
 
     @classmethod
     def new_product(cls, new_product: dict):
@@ -34,6 +41,6 @@ class Product:
     @price.setter
     def price(self, value):
         if value <= 0:
-            print("Цена не должна быть нулевая или орицательная")
+            print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = value
